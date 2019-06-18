@@ -3,7 +3,11 @@ from email.mime.text import MIMEText
 from email.header import Header
 import smtplib
 import time
+from index.models import Project
+import templates
+
 # Create your views here.
+
 
 def SendEmail(request):
     with open("pw.txt",'r') as f:
@@ -30,4 +34,8 @@ def SendEmail(request):
     except:
         print("发送失败")
 
+
+def index(request):
+    data = {'hello', 'test'}
+    return render(request, "index.html", {'data': data} )
 
