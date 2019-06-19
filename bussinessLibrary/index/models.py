@@ -26,7 +26,7 @@ class KeyWord(models.Model):
 
 class Email(models.Model):
     #改了一下
-    address = models.EmailField(primary_key=True, null=False, max_length=128,unique=True)
+    address = models.EmailField( max_length=128,unique=True,primary_key=True,null=False)
     annotation = models.CharField(max_length=128,unique=True)
     def __str__(self):
         return self.name
