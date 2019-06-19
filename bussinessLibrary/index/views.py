@@ -42,10 +42,8 @@ def index(request):
     return render(request, "index.html", {'data': data} )
 
 
-def emails_list(request):#order_by("id") 按照ID排序
-    ret = Email.objects.all().order_by("address")#数据库中查询所有用户，利用orm
-    # print(ret[0].id, ret[0].name)
-    # 得到的是两个UserInfo object对象,因为models的class对应的表中，暂时只有两条数据
+def emails_list(request):
+    ret = Email.objects.all().order_by("address")
     return render(request, "emails.html", {"Emails": ret})
 
 
@@ -63,6 +61,7 @@ def delete_emails(request):
 def add_emails(request):#第一次请求页面的时候，返回一个页面，页面有两个填写框
     error_msg = ""
     if request.method == "POST":
+        print("hello")
         new_address = request.POST.get("address", None)# print(new_name)
         new_annotation = request.POST.get("annotation", None)
         print("你添加的email address为：{0}".format(new_address))
@@ -70,7 +69,11 @@ def add_emails(request):#第一次请求页面的时候，返回一个页面，�
         return redirect("/emails_list/") # redirect返回方法 HttpResponse返回字符串
     else:
         error_msg = "Address is not right, please try again!"
-    return render(request, "add_emails.html", {"error": error_msg})#render完成HTML界面替换
+        return render(request, "add_emails.html", {"error": error_msg})#render完成HTML界面替换
+
+
+def add_emails_page(request):
+    return render(request, 'add_emails.html')
 
 def edit_emails(request):
     if request.method == "POST":
@@ -86,5 +89,5 @@ def edit_emails(request):
     if edit_address:
         email_obj = Email.objects.get(address=edit_address)#获取到数据内的这条记录，
         # 在html界面的替换语句那里加上.name表示，获取这条记录中的name值（套路）
-        return render(request,"edit_emails.html", {"email": email_obj})
+        return render(request, "edit_emails.html", {"email": email_obj})
 

@@ -5,11 +5,12 @@
     <title>Emails</title>
 </head>
 <body>
-    <h3><a href="/add_emails/" class="text-danger text-center">Add Emails</a></h3>
+    <h3><a href="{% url 'add_emails_page' %}" class="text-danger text-center">Add Emails</a></h3>
+
     <table border="1">
         <thead>
             <tr>
-                <th>Emial</th>
+                <th>Email</th>
                 <th>Annotation</th>
                 <th>Operation</th>
             </tr>

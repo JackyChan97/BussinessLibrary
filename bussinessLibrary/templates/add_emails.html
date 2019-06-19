@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Emails</title>
 </head>
+
+<form  action= "{% url 'add_emails' %}"  method="post">
+    {% csrf_token %}
+    Email address: <input type="text" name="address" >
+    </br>
+    Annotation: <input type="text" name="annotation" >
+    </br>
+    <input type="submit" value="add" >
+</form>
+
 <body>
-    <form  action="{% url 'add_emails' %}">
-        <tr>Email address: <input type="text" name="address" /></tr>
-        <tr>Annotation: <input type="text" name="annotation" /></tr>
-        <input type="submit" value="add" />
-    </form>
+
 </body>
 
 </html>
