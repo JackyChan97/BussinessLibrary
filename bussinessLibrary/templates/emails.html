@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emails</title>
+</head>
+<body>
+    <h3><a href="/add_emails/" class="text-danger text-center">Add Emails</a></h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Emial</th>
+                <th>Annotation</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for email in Eamils %}
+                <tr>
+                    <td>{{ email.address }}</td>
+                    <td>{{ email.annotaion }}</td>
+                    <td>
+                        <a href="/delete_emails/?address={{ email.address }}">Delete</a><!--a标签是GET请求-->
+                        <a href="/edit_emails/?address={{ email.address }}">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</body>
+</html>

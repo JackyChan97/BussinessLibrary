@@ -25,10 +25,13 @@ class KeyWord(models.Model):
         verbose_name_plural = "关键词"
 
 class Email(models.Model):
-    emailAddress = models.EmailField(max_length=128,unique=True)
-
+    #改了一下
+    address = models.EmailField(primary_key=True, null=False, max_length=128,unique=True)
+    annotation = models.CharField(max_length=128,unique=True)
     def __str__(self):
         return self.name
     class Meta:
         verbose_name = "邮箱"
         verbose_name_plural="邮箱"
+
+

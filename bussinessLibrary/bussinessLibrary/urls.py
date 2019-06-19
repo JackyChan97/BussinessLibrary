@@ -19,5 +19,9 @@ from index import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'index$', views.index)
+    url(r'index$', views.index),
+    url(r'^emails_list$', views.emails_list),
+    url(r'^add_emails$', views.add_emails, name='add_emails'),
+    url(r'^delete_emails$', views.delete_emails, name='delete_emails'),
+    url(r'^edit_emails$', views.edit_emails, name='edit_emails'),
 ]
