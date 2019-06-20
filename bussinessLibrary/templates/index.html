@@ -31,11 +31,11 @@
         </thead>
         <tbody>
         {% for project in projects %}
-            <tr>
-                <td>{{  project.id   }}</td>
-                <td>{{  project.name }}</td>
-                <td><a href="{{ project.url }}">{{  project.url  }}</a></td>
-                <td>{{  project.time }}</td>
+            <tr style="table-layout:word-wrap:break-word;word-break:break-all">
+                <td width="10%">{{  project.id   }}</td>
+                <td width="30%">{{  project.name }}</td>
+                <td width="30%"><a href="{{ project.url }}">{{  project.url  }}</a></td>
+                <td width="30%">{{  project.time }}</td>
             </tr>
         {% endfor %}
         </tbody>
