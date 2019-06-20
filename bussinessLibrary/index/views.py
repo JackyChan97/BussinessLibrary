@@ -9,34 +9,48 @@ import templates
 from django.shortcuts import redirect
 from django.shortcuts import HttpResponse
 from django.core.validators import validate_email
+from django.core.mail import send_mail
+from django.core.mail import send_mass_mail
+import os
 # Create your views here.
 
 
-def send_emails():
-    with open("pw.txt",'r') as f:
+def send_emails(request):
+    pa = os.getcwd()+"\\index\\pw.txt"
+    with open(pa,'r') as f:
         text = f.read()
         text = text.split("abc123")
     from_add = text[0]
     password = text[1]
+    el = Email.objects.all()
     add_list = []
-    content = "test"
-    port = 465
-    mail_server = "smtp.qq.com"
-    message = MIMEText(content,"plain","utf-8")
-    message['From'] = Header("BLSYS","utf-8")
-    message['To'] = Header("Customer","utf-8")
-    message['Subject'] = Header(time.strftime("%Y-%m-%d")+"商机","utf-8")
+    for i in el:
+        add_list = [add_list, i.address]
+    cl = Project.objects.all()
+    content = ""
+    for i in cl:
+        content = content+"项目名: "+i.name+" url: "+i.url+'\n'
 
-    try:
-        mail = smtplib.SMTP_SSL(mail_server,port)
-        status = mail.login(from_add,password)
-        print(status)
-        mail.sendmail(from_add,add_list,message.as_string())
-        print("邮件发送成功")
-        mail.quit()
-    except:
-        print("发送失败")
+    subject = time.strftime("%Y-%m-%d")+"商机"
 
+    send_mail(subject,content,from_add,add_list,fail_silently=False)
+    # port = 465
+    # mail_server = "smtp.qq.com"
+    # message = MIMEText(content,"plain","utf-8")
+    # message['From'] = Header("BLSYS","utf-8")
+    # message['To'] = Header("Customer","utf-8")
+    # message['Subject'] = Header(time.strftime("%Y-%m-%d")+"商机","utf-8","utf-8")
+
+    # try:
+    #     mail = smtplib.SMTP_SSL(mail_server,port)
+    #     status = mail.login(from_add,password)
+    #     print(status)
+    #     mail.sendmail(from_add,add_list,message.as_string())
+    #     print("邮件发送成功")
+    #     mail.quit()
+    # except:
+    #     print("发送失败")
+    return render(request,"index.html")
 
 def index(request):
     projects = Project.objects.all()

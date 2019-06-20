@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^add_emails_page/', views.add_emails_page, name='add_emails_page'),
     url(r'^add_emails$', views.add_emails, name='add_emails'),
     url(r'^delete_emails/(?P<del_address>.*)/$', views.delete_emails, name='delete_emails'),
-    url(r'^',views.index,name='index'),
+
     url(r'^send_emails', views.send_emails, name='send_emails'),
+    url(r'^',views.index,name='index'),
 ]
