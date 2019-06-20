@@ -12,7 +12,7 @@ from django.core.validators import validate_email
 # Create your views here.
 
 
-def SendEmail(request):
+def send_emails():
     with open("pw.txt",'r') as f:
         text = f.read()
         text = text.split("abc123")

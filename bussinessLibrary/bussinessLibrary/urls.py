@@ -20,10 +20,12 @@ from index import views
 from bussinessLibrary import settings
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^index$', views.index, name='index'),
+    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^emails_list/$', views.emails_list, name='emails_list'),
     url(r'^add_emails_page/', views.add_emails_page, name='add_emails_page'),
     url(r'^add_emails$', views.add_emails, name='add_emails'),
     url(r'^delete_emails/(?P<del_address>.*)/$', views.delete_emails, name='delete_emails'),
+    url(r'^',views.index,name='index'),
+    url(r'^send_emails', views.send_emails, name='send_emails'),
 ]
