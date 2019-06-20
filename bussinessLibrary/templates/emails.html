@@ -6,7 +6,6 @@
 </head>
 <body>
     <h3><a href="{% url 'add_emails_page' %}" class="text-danger text-center">Add Emails</a></h3>
-
     <table border="1">
         <thead>
             <tr>
@@ -16,18 +15,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for email in Eamils %}
+            {% for email in Emails %}
                 <tr>
                     <td>{{ email.address }}</td>
-                    <td>{{ email.annotaion }}</td>
+                    <td>{{ email.annotation }}</td>
                     <td>
-                        <a href="/delete_emails/?address={{ email.address }}">Delete</a><!--a标签是GET请求-->
-                        <a href="/edit_emails/?address={{ email.address }}">Edit</a>
+                        <a href="{% url 'delete_emails' email.address %}">Delete</a><!--a标签是GET请求-->
                     </td>
                 </tr>
             {% endfor %}
-
         </tbody>
     </table>
+    <h3><a href="{% url 'index' %}" class="text-danger text-center">Return</a></h3>
 </body>
 </html>
