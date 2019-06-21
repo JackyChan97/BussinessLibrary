@@ -28,6 +28,6 @@ urlpatterns = [
     url(r'^delete_emails/(?P<del_address>.*)/$', views.delete_emails, name='delete_emails'),
     url(r'^send_emails', views.send_emails, name='send_emails'),
     url(r'^timing_send_emails', views.timing_send_emails, name='timing_send_emails'),
-    url('r^update_info', views.update_info, name='update_info'),
+    url(r'^update_info', views.update_info, name='update_info'),
     url(r'^', views.index, name='index'),
 ]

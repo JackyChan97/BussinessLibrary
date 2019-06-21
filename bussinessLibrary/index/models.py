@@ -15,6 +15,20 @@ class Project(models.Model):
         verbose_name = "项目"
         verbose_name_plural = "项目"
 
+
+class LastProject(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    sourceId = models.IntegerField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["sourceId"]
+        verbose_name = "最新项目"
+        verbose_name_plural = "最新项目"
+
+
 class KeyWord(models.Model):
     keyword = models.CharField(max_length=128,unique=True)
 
@@ -24,6 +38,7 @@ class KeyWord(models.Model):
         ordering = ["keyword"]
         verbose_name = "关键词"
         verbose_name_plural = "关键词"
+
 
 class Email(models.Model):
     #改了一下

@@ -3,8 +3,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 import smtplib
 import time
-from index.models import Email
-from index.models import Project
+from index.models import Email, Project, LastProject
 import templates
 from django.shortcuts import redirect
 from django.shortcuts import HttpResponse
@@ -12,6 +11,7 @@ from django.core.validators import validate_email
 from django.core.mail import send_mail
 from django.core.mail import send_mass_mail
 import os
+from index import spider
 # Create your views here.
 
 
@@ -110,10 +110,32 @@ def timing_send_emails(request):
     projects = Project.objects.all()
     return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
 
+def update_date_to_database( datas ):
+    if len(datas) != 0:
+        try:
+            obj = LastProject.objects.get(sourceId=datas[0][3])
+            obj.update(name=datas[0][0])
+        except:
+            LastProject.objects.create(name=datas[0][0], sourceId=datas[0][3])
+    for data in datas:
+        try:
+            Project.objects.create(name=data[0], time=data[1], url=data[2], sourceId=data[3])
+        except:
+            continue
 
 def update_info(request):
 
+    datas1 = spider.spider1(1, "电信")
+    update_date_to_database(datas1)
 
+    datas2 = spider.spider2(1, "电信")
+    update_date_to_database(datas2)
+
+    datas3 = spider.spider2(1, "电信")
+    update_date_to_database(datas3)
+
+    datas4 = spider.spider4(1, "电信")
+    update_date_to_database(datas4)
 
     global timing_send_emails_tag
     projects = Project.objects.all()
