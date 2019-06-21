@@ -16,24 +16,24 @@ import os
 
 
 def send_emails(request):
-    pa = os.getcwd()+"\\index\\pw.txt"
-    with open(pa,'r') as f:
-        text = f.read()
-        text = text.split("abc123")
-    from_add = text[0]
-    password = text[1]
-    el = Email.objects.all()
-    add_list = []
-    for i in el:
-        add_list = [add_list, i.address]
-    cl = Project.objects.all()
-    content = ""
-    for i in cl:
-        content = content+"项目名: "+i.name+" url: "+i.url+'\n'
-
-    subject = time.strftime("%Y-%m-%d")+"商机"
-
-    send_mail(subject,content,from_add,add_list,fail_silently=False)
+    # pa = os.getcwd()+"\\index\\pw.txt"
+    # with open(pa,'r') as f:
+    #     text = f.read()
+    #     text = text.split("abc123")
+    # from_add = text[0]
+    # password = text[1]
+    # el = Email.objects.all()
+    # add_list = []
+    # for i in el:
+    #     add_list = [add_list, i.address]
+    # cl = Project.objects.all()
+    # content = ""
+    # for i in cl:
+    #     content = content+"项目名: "+i.name+" url: "+i.url+'\n'
+    #
+    # subject = time.strftime("%Y-%m-%d")+"商机"
+    #
+    # send_mail(subject,content,from_add,add_list,fail_silently=False)
     # port = 465
     # mail_server = "smtp.qq.com"
     # message = MIMEText(content,"plain","utf-8")
@@ -50,11 +50,13 @@ def send_emails(request):
     #     mail.quit()
     # except:
     #     print("发送失败")
-    return render(request,"index.html")
+
+    return render(request, "index.html")
 
 def index(request):
+    global timing_send_emails_tag
     projects = Project.objects.all()
-    return render(request, "index.html", {'projects': projects})
+    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag':timing_send_emails_tag})
 
 
 def emails_list(request):
@@ -92,5 +94,19 @@ def add_emails(request):#第一次请求页面的时候，返回一个页面，�
 
 def add_emails_page(request):
     return render(request, 'add_emails.html')
+
+
+timing_send_emails_tag = 0
+
+
+def timing_send_emails(request):
+    global timing_send_emails_tag
+    if timing_send_emails_tag:
+        timing_send_emails_tag = 0
+    else:
+        timing_send_emails_tag = 1
+
+    projects = Project.objects.all()
+    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
 
 
