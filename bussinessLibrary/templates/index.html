@@ -36,10 +36,10 @@
         <tbody>
         {% for project in projects %}
             <tr style="table-layout:word-wrap:break-word;word-break:break-all">
-                <td width="10%">{{  project.id   }}</td>
-                <td width="30%">{{  project.name }}</td>
-                <td width="30%"><a href="{{ project.url }}">{{  project.url  }}</a></td>
-                <td width="30%">{{  project.time }}</td>
+                <td width="10%" style=" text-align:center;">{{  project.id   }}</td>
+                <td width="30%" style=" text-align:center;">{{  project.name }}</td>
+                <td width="30%" style=" text-align:center;"><a href="{{ project.url }}">{{  project.url  }}</a></td>
+                <td width="30%" style=" text-align:center;">{{  project.time }}</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -52,7 +52,7 @@
             </tr>
         </tfoot>
     </table>
-    <a href="{% url 'index' %}" >      <button style="height: 50px; font-size: 20px">Update Information</button></a>
+    <a href="{% url 'update_info' %}" >      <button style="height: 50px; font-size: 20px">Update Information</button></a>
     <a href="{% url 'emails_list' %}" ><button style="height: 50px; font-size: 20px">Emails Setting</button></a>
     <a href="{% url 'send_emails' %}" ><button style="height: 50px; font-size: 20px">Send Emails</button></a>
 {#    switch #}

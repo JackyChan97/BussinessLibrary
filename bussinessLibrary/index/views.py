@@ -53,6 +53,7 @@ def send_emails(request):
 
     return render(request, "index.html")
 
+
 def index(request):
     global timing_send_emails_tag
     projects = Project.objects.all()
@@ -110,3 +111,10 @@ def timing_send_emails(request):
     return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
 
 
+def update_info(request):
+
+
+
+    global timing_send_emails_tag
+    projects = Project.objects.all()
+    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
