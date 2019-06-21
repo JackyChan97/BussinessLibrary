@@ -16,24 +16,27 @@ from index import spider
 
 
 def send_emails(request):
-    # pa = os.getcwd()+"\\index\\pw.txt"
-    # with open(pa,'r') as f:
-    #     text = f.read()
-    #     text = text.split("abc123")
-    # from_add = text[0]
-    # password = text[1]
-    # el = Email.objects.all()
-    # add_list = []
-    # for i in el:
-    #     add_list = [add_list, i.address]
-    # cl = Project.objects.all()
-    # content = ""
-    # for i in cl:
-    #     content = content+"项目名: "+i.name+" url: "+i.url+'\n'
-    #
-    # subject = time.strftime("%Y-%m-%d")+"商机"
-    #
-    # send_mail(subject,content,from_add,add_list,fail_silently=False)
+    pa = os.getcwd()+"\\index\\pw.txt"
+    with open(pa,'r') as f:
+        text = f.read()
+        text = text.split("abc123")
+    from_add = text[0]
+    password = text[1]
+    el = Email.objects.all()
+    add_list = []
+    for i in el:
+        add_list = [add_list, i.address]
+    cl = Project.objects.all()
+    content = ""
+    for i in cl:
+        content = content+"项目名: "+i.name+" url: "+i.url+'\n'
+
+    subject = time.strftime("%Y-%m-%d")+"商机"
+    try:
+        send_mail(subject,content,from_add,add_list,fail_silently=False)
+        print("发送成功")
+    except:
+        print("发送失败")
     # port = 465
     # mail_server = "smtp.qq.com"
     # message = MIMEText(content,"plain","utf-8")
@@ -51,7 +54,7 @@ def send_emails(request):
     # except:
     #     print("发送失败")
 
-    return render(request, "index.html")
+    return redirect( "/index/")
 
 
 def index(request):

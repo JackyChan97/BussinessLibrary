@@ -22,6 +22,25 @@
         } );
     </script>
 
+    <script>
+        var timer = setInterval(function () {myTimer()  },1000)
+        
+        function myTimer() {
+            var data = new Date()
+            if (data.getHours()==7 && data.getMinutes()==0 && data.getSeconds()==0){
+                btu = document.getElementById("updateButton")
+                btu.click()
+                alert("information update")
+            }
+            if (data.getHours()==8 && data.getMinutes()==0 && data.getSeconds()==0){
+                bts = document.getElementById("sendEmailButton")
+                bts.click()
+                alert("eamil sent")
+            }
+
+        }
+
+    </script>
 </head>
 <body>
     <table id="example" class="display" style="width:100%">
@@ -52,9 +71,9 @@
             </tr>
         </tfoot>
     </table>
-    <a href="{% url 'update_info' %}" >      <button style="height: 50px; font-size: 20px">Update Information</button></a>
+    <a href="{% url 'update_info' %}" >      <button style="height: 50px; font-size: 20px" id="updateButton">Update Information</button></a>
     <a href="{% url 'emails_list' %}" ><button style="height: 50px; font-size: 20px">Emails Setting</button></a>
-    <a href="{% url 'send_emails' %}" ><button style="height: 50px; font-size: 20px">Send Emails</button></a>
+    <a href="{% url 'send_emails' %}" ><button style="height: 50px; font-size: 20px" id="sendEmailButton">Send Emails</button></a>
 {#    switch #}
 
     <button style="height: 50px; font-size: 20px; color: black" class="col-sm-6 col-lg-4" >Timing Send Emails:
