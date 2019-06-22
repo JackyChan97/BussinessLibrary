@@ -16,17 +16,17 @@ class Project(models.Model):
         verbose_name_plural = "项目"
 
 
-class LastProject(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    sourceId = models.IntegerField(unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ["sourceId"]
-        verbose_name = "最新项目"
-        verbose_name_plural = "最新项目"
+# class LastProject(models.Model):
+#     name = models.CharField(max_length=128, unique=True)
+#     sourceId = models.IntegerField(unique=True)
+#
+#     def __str__(self):
+#         return self.name
+#
+#     class Meta:
+#         ordering = ["sourceId"]
+#         verbose_name = "最新项目"
+#         verbose_name_plural = "最新项目"
 
 
 class KeyWord(models.Model):

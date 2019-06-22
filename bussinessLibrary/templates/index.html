@@ -46,7 +46,6 @@
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>URL</th>
                 <th>Time</th>
@@ -55,16 +54,14 @@
         <tbody>
         {% for project in projects %}
             <tr style="table-layout:word-wrap:break-word;word-break:break-all">
-                <td width="10%" style=" text-align:center;">{{  project.id   }}</td>
-                <td width="30%" style=" text-align:center;">{{  project.name }}</td>
-                <td width="30%" style=" text-align:center;"><a href="{{ project.url }}">{{  project.url  }}</a></td>
-                <td width="30%" style=" text-align:center;">{{  project.time }}</td>
+                <td width="40%" style=" text-align:center;">{{  project.name }}</td>
+                <td width="40%" style=" text-align:center;"><a href="{{ project.url }}">{{  project.url  }}</a></td>
+                <td width="20%" style=" text-align:center;">{{  project.time|date:"Y-m-d " }}</td>
             </tr>
         {% endfor %}
         </tbody>
         <tfoot>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>URL</th>
                 <th>Time</th>

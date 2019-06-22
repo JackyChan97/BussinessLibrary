@@ -4,7 +4,7 @@ from bs4 import  BeautifulSoup
 import requests
 from lxml import html
 import time
-from index.models import LastProject, Project
+from index.models import  Project
 import math
 
 KEY_WORD = '电信'
@@ -33,10 +33,10 @@ def spider1(page_n,kw):
     kw = encode_kw(kw)
     url = 'http://search.ccgp.gov.cn/bxsearch?searchtype=2&page_index=1&bidSort=0&buyerName=&projectId=&pinMu=0&bidType=1&dbselect=bidx&kw=%s' % kw + '&start_time=2019%3A05%3A21&end_time=2019%3A06%3A21&timeType=3&displayZone=&zoneId=&pppStatus=0&agentName=' # 需要爬数据的网址
 
-    try:
-        last_title = LastProject.objects.get(sourceId=1).name
-    except:
-        last_title = '-1'
+    # try:
+    #     last_title = LastProject.objects.get(sourceId=1).name
+    # except:
+    #     last_title = '-1'
     repeated = False
     for i in range(1, page_n + 1):
         tmpUrl = url.replace("page_index=1", "page_index=" + str(i))
@@ -48,18 +48,18 @@ def spider1(page_n,kw):
             date = date.replace('.','-')
             link = href_list[j]
 
-            if title == last_title:
-                repeated = True
-                break
+            # if title == last_title:
+            #     repeated = True
+            #     break
 
             data.append(title)
             data.append(date)
             data.append(link)
             data.append(1)
             datas.append(data)
-        if repeated == True:
-            print("已经重复")
-            break
+        # if repeated == True:
+        #     print("已经重复")
+        #     break
     return datas
 
 def getPageHref(pageurl):
@@ -124,11 +124,11 @@ def spider2(page_n,kw ='电信'):
         links = soup.find_all(attrs={"class": "as-pager-item"})
         titles = soup.find_all(attrs={"class": "as-p-tit"})
 
-        try:
-            last_title = LastProject.objects.get(sourceId=2).name
-        except:
-            last_title = '-1'
-        repeated = False
+        # try:
+        #     last_title = LastProject.objects.get(sourceId=2).name
+        # except:
+        #     last_title = '-1'
+        # repeated = False
 
         for i in range(0,len(titles)):
             data = []
@@ -137,17 +137,17 @@ def spider2(page_n,kw ='电信'):
             date = tmp[2].string[5:]
             link = links[i].get('href')
 
-            if title == last_title:
-                repeated = True
-                break
+            # if title == last_title:
+            #     repeated = True
+            #     break
 
             data.append(title)
             data.append(date)
             data.append(link)
             data.append(2)
             datas.append(data)
-        if repeated == True:
-            break
+        # if repeated == True:
+        #     break
 
     return datas
 
@@ -187,11 +187,11 @@ def spider3(page_n,kw):
         res = urllib.request.urlopen(url)
         soup = BeautifulSoup(res)
         tr = soup.find_all('tr')
-        try:
-            last_title = LastProject.objects.get(sourceId=3).name
-        except:
-            last_title = '-1'
-        repeated = False
+        # try:
+        #     last_title = LastProject.objects.get(sourceId=3).name
+        # except:
+        #     last_title = '-1'
+        # repeated = False
         for i in range(1,34):
             try:
                 data = []
@@ -201,18 +201,18 @@ def spider3(page_n,kw):
                 link = td[2].a.get('href')
             except:
                 continue
-
-            if title == last_title:
-                repeated = True
-                break
+            #
+            # if title == last_title:
+            #     repeated = True
+            #     break
 
             data.append(title)
             data.append(date)
             data.append(link)
             data.append(3)
             datas.append(data)
-        if repeated == True:
-            break
+        # if repeated == True:
+        #     break
 
     return datas
 
@@ -251,28 +251,28 @@ def spider4(page_n,kw):
         soup = BeautifulSoup(res)
         a = soup.find_all(attrs={"class": "gccon_title"})
         b = soup.find_all(attrs={"class": "gc_date"})
-        try:
-            last_title = LastProject.objects.get(sourceId=4).name
-        except:
-            last_title = '-1'
-        repeated = False
+        # try:
+        #     last_title = LastProject.objects.get(sourceId=4).name
+        # except:
+        #     last_title = '-1'
+        # repeated = False
         for i in range(0,len(a)):
             data = []
             title = (a[0].text)
             date = (b[0].text)
             link = (a[0].get('href'))
 
-            if title == last_title:
-                repeated = True
-                break
+            # if title == last_title:
+            #     repeated = True
+            #     break
 
             data.append(title)
             data.append(date)
             data.append(link)
             data.append(4)
             datas.append(data)
-        if repeated == True:
-            break
+        # if repeated == True:
+        #     break
 
     return datas
 
