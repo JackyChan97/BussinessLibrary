@@ -125,20 +125,20 @@ def update_date_to_database( datas ):
             Project.objects.create(name=data[0], time=data[1], url=data[2], sourceId=data[3])
         except:
             continue
-
+keywords=['电子政务','专线','专网','链路','宽带','校园网','天网','城域网','网络服务','广域网','短信','光缆','光纤网络','数字电路','话务','传输服务','专线接入']
 def update_info(request):
+    for i in range(len(keywords)):
+        datas1 = spider.spider1(1, keywords[i])
+        update_date_to_database(datas1)
 
-    datas1 = spider.spider1(1, "电信")
-    update_date_to_database(datas1)
+        datas2 = spider.spider2(1, keywords[i])
+        update_date_to_database(datas2)
 
-    datas2 = spider.spider2(1, "电信")
-    update_date_to_database(datas2)
+        datas3 = spider.spider2(1, keywords[i])
+        update_date_to_database(datas3)
 
-    datas3 = spider.spider2(1, "电信")
-    update_date_to_database(datas3)
-
-    datas4 = spider.spider4(1, "电信")
-    update_date_to_database(datas4)
+        datas4 = spider.spider4(1, keywords[i])
+        update_date_to_database(datas4)
 
     global timing_send_emails_tag
     projects = Project.objects.all()
