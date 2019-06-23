@@ -67,12 +67,21 @@ def getPageHref(pageurl):
         page = requests.get(pageurl, timeout=30, headers={'user-agent': 'Mozilla/5.0'})
         tree = html.fromstring(page.text)
         result = tree.xpath('//ul[@class="vT-srch-result-list-bid"]//li/a/@href')
+
         infomation = tree.xpath('//ul[@class="vT-srch-result-list-bid"]//li/span/text()')
-        title = tree.xpath('//ul[@class="vT-srch-result-list-bid"]//li/a/text()')
-        return result, infomation,title
+        titles =[]
+        for i in range(len(result)):
+            newpage = requests.get(result[i],timeout=30, headers={'user-agent': 'Mozilla/5.0'})
+            newpage.encoding="utf-8"
+            newtree = html.fromstring(newpage.text)
+            title = newtree.xpath('//div[@class="vT_detail_header" or @class="vF_detail_header"]//h2//text()')[0]
+            titles.append(title)
+            # print(titles)
+        # print(title)
+        return result, infomation,titles
     except:
         print("connect error")
-        time.sleep(3)
+        time.sleep(1)
 
 
 
