@@ -58,9 +58,9 @@ def send_emails(request):
 
 
 def index(request):
-    global timing_send_emails_tag
-    projects = Project.objects.all()
-    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag':timing_send_emails_tag})
+    projects = Project.objects.order_by("-time")
+    # projects = Project.objects.all()
+    return render(request, "index.html", {'projects': projects})
 
 
 def emails_list(request):
@@ -100,18 +100,11 @@ def add_emails_page(request):
     return render(request, 'add_emails.html')
 
 
-timing_send_emails_tag = 0
-
-
 def timing_send_emails(request):
-    global timing_send_emails_tag
-    if timing_send_emails_tag:
-        timing_send_emails_tag = 0
-    else:
-        timing_send_emails_tag = 1
+    projects = Project.objects.order_by("-time")
+    # projects = Project.objects.all()
+    return render(request, "index.html", {'projects': projects})
 
-    projects = Project.objects.all()
-    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
 
 def update_date_to_database( datas ):
     # if len(datas) != 0:
@@ -131,6 +124,8 @@ keywords=['电子政务','专线','专网','链路','宽带','校园网','天网
 # for i in range(len(keywords)):
 #     keywords[i]=keywords[i].split('\n')[0]
 # print(keywords)
+
+
 def update_info(request):
     try:
         for i in range(len(keywords)):
@@ -147,8 +142,8 @@ def update_info(request):
             update_date_to_database(datas4)
     except:
         print("updataError")
-    global timing_send_emails_tag
-    projects = Project.objects.all()
-    return render(request, "index.html", {'projects': projects, 'timing_send_emails_tag': timing_send_emails_tag})
+    projects = Project.objects.order_by("-time")
+    # projects = Project.objects.all()
+    return render(request, "index.html", {'projects': projects})
 
 

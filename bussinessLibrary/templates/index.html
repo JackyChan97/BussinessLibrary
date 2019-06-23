@@ -11,7 +11,7 @@
     <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}" ></script>
 
 {#    switch #}
-    <link href="{% static 'css/bootstrap-switch.css' %}" rel="stylesheet">
+{#    <link href="{% static 'css/bootstrap-switch.css' %}" rel="stylesheet">#}
 
     <!--初始化代码-->
     <script>
@@ -70,16 +70,17 @@
     </table>
     <a href="{% url 'update_info' %}" >      <button style="height: 50px; font-size: 20px" id="updateButton">Update Information</button></a>
     <a href="{% url 'emails_list' %}" ><button style="height: 50px; font-size: 20px">Emails Setting</button></a>
-    <a href="{% url 'send_emails' %}" ><button style="height: 50px; font-size: 20px" id="sendEmailButton">Send Emails</button></a>
-{#    switch #}
+    <a href="{% url 'send_emails' %}" ><button style="height: 50px; font-size: 20px">Send Emails</button></a>
 
-    <button style="height: 50px; font-size: 20px; color: black" class="col-sm-6 col-lg-4" >Timing Send Emails:
-        <input  id="switch-state" type="checkbox" name="state" checked >
-    </button>
+    {#    switch #}
 
-    <script src="{% static 'js/highlight.js' %}"></script>
-    <script src="{% static 'js/bootstrap-switch.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+{#    <button style="height: 50px; font-size: 20px; color: black" class="col-sm-6 col-lg-4" >Timing Send Emails:#}
+{#        <input  id="switch-state" type="checkbox" name="state" checked >#}
+{#    </button>#}
+{##}
+{#    <script src="{% static 'js/highlight.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap-switch.js' %}"></script>#}
+{#    <script src="{% static 'js/main.js' %}"></script>#}
 </body>
 
 </html>

@@ -3,10 +3,10 @@ from django.db import models
 
 # Create your models here.
 class Project(models.Model):
-    name = models.CharField(max_length=128,unique=True)
+    name = models.CharField(max_length=128, unique=True)
     url = models.URLField(max_length=200)
     time = models.DateTimeField()
-    sourceId = models.IntegerField( default=-1 )
+    sourceId = models.IntegerField(default=-1)
 
     def __str__(self):
         return self.name
