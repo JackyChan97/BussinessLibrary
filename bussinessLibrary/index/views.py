@@ -126,6 +126,11 @@ def update_date_to_database( datas ):
         except:
             continue
 keywords=['电子政务','专线','专网','链路','宽带','校园网','天网','城域网','网络服务','广域网','短信','光缆','光纤网络','数字电路','话务','传输服务','专线接入']
+# with open('keyword.txt','r') as f:
+#     keywords = f.readlines()
+# for i in range(len(keywords)):
+#     keywords[i]=keywords[i].split('\n')[0]
+# print(keywords)
 def update_info(request):
     try:
         for i in range(len(keywords)):

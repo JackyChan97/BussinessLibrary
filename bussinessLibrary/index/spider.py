@@ -185,45 +185,49 @@ def update3():
 
 def spider3(page_n,kw):
     #https://bidnews.cn/caigou/search.php?kw=%E7%94%B5%E4%BF%A1
-    kw = encode_kw(kw)
-    datas = []
-    for i in range(1,page_n+1):
-        # print("page %i" % i + " spiding")
-        if i == 1:
-            url = "https://bidnews.cn/caigou/search.php?areaid=0&fields=&kw=%s" % kw
-        else:
-            url = "https://bidnews.cn/caigou/search.php?areaid=0&fields=&kw=%s" % kw + '&page=%i' % i
-        res = urllib.request.urlopen(url)
-        soup = BeautifulSoup(res)
-        tr = soup.find_all('tr')
-        # try:
-        #     last_title = LastProject.objects.get(sourceId=3).name
-        # except:
-        #     last_title = '-1'
-        # repeated = False
-        for i in range(1,34):
-            try:
-                data = []
-                td = tr[i].find_all('td')
-                title = td[2].text
-                date = td[4].text
-                link = td[2].a.get('href')
-            except:
-                continue
-            #
-            # if title == last_title:
-            #     repeated = True
+    try:
+        kw = encode_kw(kw)
+        datas = []
+        for i in range(1,page_n+1):
+            # print("page %i" % i + " spiding")
+            if i == 1:
+                url = "https://bidnews.cn/caigou/search.php?areaid=0&fields=&kw=%s" % kw
+            else:
+                url = "https://bidnews.cn/caigou/search.php?areaid=0&fields=&kw=%s" % kw + '&page=%i' % i
+            res = urllib.request.urlopen(url)
+            soup = BeautifulSoup(res)
+            tr = soup.find_all('tr')
+            # try:
+            #     last_title = LastProject.objects.get(sourceId=3).name
+            # except:
+            #     last_title = '-1'
+            # repeated = False
+            for i in range(1,34):
+                try:
+                    data = []
+                    td = tr[i].find_all('td')
+                    title = td[2].text
+                    date = td[4].text
+                    link = td[2].a.get('href')
+                except:
+                    continue
+                #
+                # if title == last_title:
+                #     repeated = True
+                #     break
+
+                data.append(title)
+                data.append(date)
+                data.append(link)
+                data.append(3)
+                datas.append(data)
+            # if repeated == True:
             #     break
 
-            data.append(title)
-            data.append(date)
-            data.append(link)
-            data.append(3)
-            datas.append(data)
-        # if repeated == True:
-        #     break
-
-    return datas
+        return datas
+    except:
+        print("sp3 error")
+        time.sleep(1)
 
 
 
